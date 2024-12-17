@@ -1,4 +1,4 @@
-# Setup 
+# Setup
 
 01 - Rodar o comando para criar o projeto ReactJS. Trocar o nome do projeto
 
@@ -26,5 +26,62 @@ function App() {
 }
 
 export default App;
-
 ```
+
+07 - Instalar o `react-router-dom`
+
+```bash
+npm i react-router-dom
+```
+
+08 - Dentro de `src` criar as pastas `components`, `configs` e `pages`
+
+08 - Dentro de `pages`, criar os arquivos que vão representar as páginas, ex: `Home.tsx`
+
+```bash
+export function Home() {
+  return (
+    <div>
+      <h1>Hellou</h1>
+    </div>
+  );
+}
+```
+
+09 - Dentro de `config` criar a pasta `routes` e o arquivo `AppRoutes.tsx`
+
+```bash
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import { Home } from "../../pages/Home";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/",
+    element: <Navigate to={"/home"} />,
+  },
+]);
+
+export function AppRoutes() {
+  return <RouterProvider router={router} />;
+}
+```
+
+10 - Chamar o `AppRoutes` dentro do `App.tsx`
+```bash
+import { AppRoutes } from "./configs/routes/AppRoutes";
+
+function App() {
+  return <AppRoutes />;
+}
+
+export default App;
+```
+

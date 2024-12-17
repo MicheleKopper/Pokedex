@@ -1,4 +1,4 @@
-# Setup
+# Setup - React Router DOM
 
 01 - Rodar o comando para criar o projeto ReactJS. Trocar o nome do projeto
 
@@ -75,6 +75,7 @@ export function AppRoutes() {
 ```
 
 10 - Chamar o `AppRoutes` dentro do `App.tsx`
+
 ```bash
 import { AppRoutes } from "./configs/routes/AppRoutes";
 
@@ -85,3 +86,61 @@ function App() {
 export default App;
 ```
 
+12 - Rodar o script dev para subir o frontEnd. No terminal acessar o link local (ctrl + clique) http://localhost:5173/
+
+```bash
+npm run dev
+```
+# Instalação MUI Material
+
+01 - Instalar o MUI Material
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+02 - Instalar os icones
+
+```bash
+npm install @mui/icons-material
+```
+
+04 - Dentro da pasta `configs` criar a pasta `global`, criar o arquivo `GlobalStyled.tsx` e inserir o código abaixo:
+
+```bash
+import { CssBaseline, CSSObject, GlobalStyles } from "@mui/material";
+
+const styles: Record<string, CSSObject> = {
+  body: {
+    fontFamily: "",
+  },
+};
+
+export function GlobalStyled() {
+  return (
+    <>
+      <CssBaseline />
+      <GlobalStyles styles={styles} />
+    </>
+  );
+}
+
+```
+
+05 - Chamar o `GlobalStyled` no arquivo `App.tsx`
+
+```bash
+import { GlobalStyled } from "./configs/global/GlobalStyled";
+import { AppRoutes } from "./configs/routes/AppRoutes";
+
+function App() {
+  return (
+    <>
+      <GlobalStyled />
+      <AppRoutes />
+    </>
+  );
+}
+
+export default App;
+```

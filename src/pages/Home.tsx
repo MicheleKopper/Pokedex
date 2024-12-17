@@ -1,7 +1,9 @@
+import { Navbar } from "../components/Navbar/Navbar";
+
 export function Home() {
   return (
-    <div>
-      <h1>Hellou</h1>
-    </div>
+    <>
+      <Navbar />
+    </>
   );
 }

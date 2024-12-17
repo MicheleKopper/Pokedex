@@ -6,19 +6,19 @@
 npm create vite@latest NOME-DO-PROJETO -- --template react-ts
 ```
 
-03 - Abrir a pasta do projeto criado
+02 - Abrir a pasta do projeto criado
 
-04 - Instalar as dependências (node modules)
+03 - Instalar as dependências (node modules)
 
 ```bash
 npm install
 ```
 
-05 - Excluir arquivos CSS desnecessários `(index.css, app.css)`
+04 - Excluir arquivos CSS desnecessários `(index.css, app.css)`
 
-06 - No arquivo `main.tsx` excluir o `import './index.css'`
+05 - No arquivo `main.tsx` excluir o `import './index.css'`
 
-11 - Limpar o arquivo `App.tsx`
+06 - Limpar o arquivo `App.tsx`
 
 ```bash
 function App() {
@@ -36,7 +36,7 @@ npm i react-router-dom
 
 08 - Dentro de `src` criar as pastas `components`, `configs` e `pages`
 
-08 - Dentro de `pages`, criar os arquivos que vão representar as páginas, ex: `Home.tsx`
+09 - Dentro de `pages`, criar os arquivos que vão representar as páginas, ex: `Home.tsx`
 
 ```bash
 export function Home() {
@@ -48,7 +48,7 @@ export function Home() {
 }
 ```
 
-09 - Dentro de `config` criar a pasta `routes` e o arquivo `AppRoutes.tsx`
+10 - Dentro de `config` criar a pasta `routes` e o arquivo `AppRoutes.tsx`
 
 ```bash
 import {
@@ -74,7 +74,7 @@ export function AppRoutes() {
 }
 ```
 
-10 - Chamar o `AppRoutes` dentro do `App.tsx`
+11 - Chamar o `AppRoutes` dentro do `App.tsx`
 
 ```bash
 import { AppRoutes } from "./configs/routes/AppRoutes";
@@ -91,6 +91,7 @@ export default App;
 ```bash
 npm run dev
 ```
+
 # Instalação MUI Material
 
 01 - Instalar o MUI Material
@@ -105,7 +106,7 @@ npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/icons-material
 ```
 
-04 - Dentro da pasta `configs` criar a pasta `global`, criar o arquivo `GlobalStyled.tsx` e inserir o código abaixo:
+03 - Dentro da pasta `configs` criar a pasta `global`, criar o arquivo `GlobalStyled.tsx` e inserir o código abaixo:
 
 ```bash
 import { CssBaseline, CSSObject, GlobalStyles } from "@mui/material";
@@ -127,7 +128,7 @@ export function GlobalStyled() {
 
 ```
 
-05 - Chamar o `GlobalStyled` no arquivo `App.tsx`
+04 - Chamar o `GlobalStyled` no arquivo `App.tsx`
 
 ```bash
 import { GlobalStyled } from "./configs/global/GlobalStyled";

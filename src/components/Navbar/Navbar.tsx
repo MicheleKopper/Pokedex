@@ -27,7 +27,7 @@ export function Navbar() {
       <AppBar position="static">
         <Toolbar
           sx={{
-            bgcolor: "#FFCB04",
+            bgcolor: "#FFCC00",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -40,7 +40,7 @@ export function Navbar() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, color: "#0960AE" }}
             onClick={handleClick}
           >
             <MenuIcon />
@@ -58,9 +58,10 @@ export function Navbar() {
             slotProps={{
               paper: {
                 sx: {
-                  width: "200px", 
-                  bgcolor: "#f5f5f5", 
-                  padding: "8px", 
+                  width: "200px",
+                  bgcolor: "#0960AE",
+                  color:"white",
+                  padding: "8px",
                 },
               },
             }}

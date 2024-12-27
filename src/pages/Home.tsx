@@ -6,7 +6,7 @@ export function Home() {
   return (
     <>
       <Navbar />
-      <CardPokemon />
+      <CardPokemon name={""} image={""} id={0} height={0} weight={0} />
     </>
   );
 }

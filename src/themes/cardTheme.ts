@@ -41,12 +41,6 @@ export const cardTheme = createTheme({
           "&:hover": {
             color: "#FE0000",
           },
-          "&:focus-visible": {
-            boxShadow: "none", // Remover sombra ao focar no ícone
-          },
-          "&:active": {
-            boxShadow: "none", // Remover sombra ao clicar
-          },
         },
       },
     },

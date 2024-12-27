@@ -1,33 +1,30 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-
-import CardActionArea from "@mui/material/CardActionArea";
-
 import { Box, Grid2, IconButton } from "@mui/material";
-import { useEffect } from "react";
-import axios from "axios";
+import CardMedia from "@mui/material/CardMedia";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
-export function CardPokemon() {
-  // Função para buscar os dados da API
-  useEffect(() => {
-    const fetchPokemon = async () => {
-      try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?limit=10"
-        );
-        console.log("Resposta da API:", response.data);
-      } catch (error) {
-        console.error("Erro ao buscar dados da API:", error);
-      }
-    };
+interface Pokemon {
+  name: string;
+  image: string;
+  id: number;
+  height: number;
+  weight: number;
+  onFavorite?: (id: number) => void; // Adicionada prop para favoritar
+  onDetailsClick?: (id: number) => void; // Adicionada prop para detalhes
+}
 
-    fetchPokemon();
-  }, []); // O array vazio significa que o useEffect será executado apenas uma vez
-
+export function CardPokemon({
+  name,
+  image,
+  id,
+  height,
+  weight,
+  onFavorite,
+  onDetailsClick,
+}: Pokemon) {
   return (
     <Box
       sx={{
@@ -35,70 +32,74 @@ export function CardPokemon() {
         justifyContent: "center",
         alignItems: "center",
         width: "100vw",
-        bgcolor: "#F8FAFC",
+        marginTop: "80px",
       }}
     >
-      <Card>
-        <CardActionArea
+      <Card
+        sx={{
+          width: 250,
+          height: 350,
+          borderRadius: "20px",
+          boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
+        }}
+      >
+        <CardMedia
+          component="img"
           sx={{
-            width: 250,
-            height: 300,
+            width: "100%",
+            height: "200px",
+            objectFit: "contain", // Mantém a proporção da imagem dentro do espaço
           }}
-        >
-          <CardMedia
-            component="img"
+          image={image}
+          alt={name}
+        />
+
+        <CardContent>
+          <Grid2
+            container
+            spacing={2}
             sx={{
-              width: "100%", // Ajusta a largura para ocupar todo o espaço disponível
-              height: "200px", // Define uma altura fixa
-              objectFit: "contain", // Mantém a proporção da imagem dentro do espaço
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
-            image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/25.png"
-            alt="Pikachu"
-          />
+          >
+            <Typography gutterBottom variant="h5" component="div">
+              {name}
+            </Typography>
 
-          <CardContent>
-            <Grid2
-              container
-              spacing={2}
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Typography gutterBottom variant="h5" component="div">
-                Pikachu
-              </Typography>
+            <Typography variant="h6"># {id}</Typography>
+          </Grid2>
 
-              <Typography variant="h6">#25</Typography>
-            </Grid2>
-
-            <Typography variant="subtitle1">Height: 4 | Weight: 60</Typography>
-          </CardContent>
-        </CardActionArea>
+          <Typography variant="subtitle1">
+            Height: {height} | Weight: {weight}
+          </Typography>
+        </CardContent>
 
         {/* Ícones */}
-
-        <Grid2
-          container
-          spacing={2}
+        <Box
           sx={{
-            display: "inline-flex",
+            display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
             marginLeft: "8px",
+            paddingBottom: "8px",
           }}
         >
-          <IconButton aria-label="Detailes">
+          <IconButton
+            aria-label="Detailes"
+            onClick={() => onDetailsClick?.(id)} // Chama a função de detalhes
+          >
             <CatchingPokemonIcon />
           </IconButton>
 
-          <IconButton aria-label="Pokedex" sx={{
-            
-          }}>
+          <IconButton
+            aria-label="Pokedex"
+            onClick={() => onFavorite?.(id)} // Chama a função de favoritar
+          >
             <FavoriteIcon />
           </IconButton>
-        </Grid2>
+        </Box>
       </Card>
     </Box>
   );

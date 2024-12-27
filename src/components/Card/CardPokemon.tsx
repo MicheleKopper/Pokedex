@@ -65,7 +65,10 @@ export function CardPokemon({
             }}
           >
             <Typography gutterBottom variant="h5" component="div">
-              {name}
+              {name.charAt(0).toUpperCase() + name.slice(1)}
+              {/* charAt(0).toUpperCase(): pega a primeira letra e modifica
+              
+              slice(1): pega o restante a partir da segunda letra (não modifica a fonte) */}
             </Typography>
 
             <Typography variant="h6"># {id}</Typography>

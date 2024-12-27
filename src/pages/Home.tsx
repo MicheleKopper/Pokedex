@@ -1,12 +1,12 @@
 
 import { Navbar } from "../components/Navbar/Navbar";
-import { CardPokemon } from "../components/Card/CardPokemon";
+import { PokemonList } from "../components/List/PokemonList";
 
 export function Home() {
   return (
     <>
       <Navbar />
-      <CardPokemon name={""} image={""} id={0} height={0} weight={0} />
+      <PokemonList />
     </>
   );
 }

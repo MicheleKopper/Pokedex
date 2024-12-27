@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { CardPokemon } from "../Card/CardPokemon";
 import { useDispatch, useSelector } from "react-redux";
+import { CardPokemon } from "../Card/CardPokemon";
 import { AppDispatch, RootState } from "../store";
 import { pokemonAsyncThunk } from "../store/modules/pokemonSlice";
 
@@ -18,16 +18,14 @@ export function PokemonList() {
 
   return (
     <>
-      {list.map((pokemon: { name: string; url: string }, index: number) => (
+      {list.map((pokemon) => (
         <CardPokemon
-          key={index}
+          key={pokemon.id}
           name={pokemon.name}
-          image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-            index + 1
-          }.png`}
-          id={index + 1}
-          height={0} // Se necessário, busque os detalhes com uma nova chamada de API
-          weight={0} // Idem acima
+          image={pokemon.image}
+          id={pokemon.id}
+          height={pokemon.height}
+          weight={pokemon.weight}
         />
       ))}
     </>

@@ -1,15 +1,22 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// nome: typePrefix
-// callback: payloadCreator
-// (arg, thunkAPI) => {}
-// arg: data(parametro)
-// thunkAPI: objeto que contem algumas funcionalidades/ferramentas
+interface Pokemon {
+  name: string;
+  id: number;
+  image: string;
+  height: number;
+  weight: number;
+}
 
+interface PokemonState {
+  list: Pokemon[];
+  details: Pokemon | null;
+  favorites: Pokemon[];
+  loading: boolean;
+}
 
-
-const initialState = {
+const initialState: PokemonState = {
   list: [],
   details: null,
   favorites: [],
@@ -18,12 +25,31 @@ const initialState = {
 
 // createAsyncThunk(nome, callback): Promise
 // Buscar os dados da API - CARD
-export const pokemonAsyncThunk = createAsyncThunk("pokemon/list", async () => {
-  const response = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20"
-  );
-  return response.data.results;
-});
+export const pokemonAsyncThunk = createAsyncThunk<Pokemon[]>(
+  "pokemon/list",
+  async () => {
+    const response = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20"
+    );
+    const results = response.data.results;
+
+    // Obter detalhes adicionais para cada Pokémon
+    const detailedPokemon = await Promise.all(
+      results.map(async (pokemon: { name: string; url: string }) => {
+        const details = await axios.get(pokemon.url);
+        return {
+          name: details.data.name,
+          id: details.data.id,
+          image: details.data.sprites.other.home.front_default,
+          height: details.data.height,
+          weight: details.data.weight,
+        };
+      })
+    );
+
+    return detailedPokemon;
+  }
+);
 
 // Buscar os dados da API - DETALHES
 export const detailsPokemonAsyncThunk = createAsyncThunk(
@@ -39,8 +65,8 @@ const pokemonSlice = createSlice({
   name: "pokemon",
   initialState: initialState,
   reducers: {
-    addFavorites: (state, action) => {
-      state.favorites.push = action.payload;
+    addFavorites: (state, action: PayloadAction<Pokemon>) => {
+      state.favorites.push(action.payload);
     },
   },
   extraReducers(builder) {
@@ -52,10 +78,13 @@ const pokemonSlice = createSlice({
       })
 
       // fulfilled = está completo
-      .addCase(pokemonAsyncThunk.fulfilled, (state, action) => {
-        state.loading = false; // Para de carregar
-        state.list = action.payload.results; // Atualiza os dados
-      })
+      .addCase(
+        pokemonAsyncThunk.fulfilled,
+        (state, action: PayloadAction<Pokemon[]>) => {
+          state.loading = false; // Para de carregar
+          state.list = action.payload;
+        }
+      )
 
       .addCase(detailsPokemonAsyncThunk.fulfilled, (state, action) => {
         state.details = action.payload;

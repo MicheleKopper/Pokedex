@@ -43,6 +43,7 @@ export function CardPokemon({
   abilities,
   stats,
 }: Pokemon) {
+  
   const [open, setOpen] = useState(false);
 
   // Função para abrir o modal
@@ -50,6 +51,8 @@ export function CardPokemon({
 
   // Função para fechar o modal
   const handleClose = () => setOpen(false);
+
+  
 
   return (
     <Box

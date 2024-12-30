@@ -6,7 +6,10 @@ import { pokemonAsyncThunk } from "../store/modules/pokemonSlice";
 
 export function PokemonList() {
   const dispatch = useDispatch<AppDispatch>();
-  const { list, loading } = useSelector((state: RootState) => state.pokemon);
+
+  const { list, loading } = useSelector(
+    (state: RootState) => state.pokemon
+  );
 
   useEffect(() => {
     dispatch(pokemonAsyncThunk());
@@ -17,19 +20,21 @@ export function PokemonList() {
   }
 
   return (
-    <div className="card-container">
-      {list.map((pokemon) => (
-        <CardPokemon
-          key={pokemon.id}
-          name={pokemon.name}
-          image={pokemon.image}
-          id={pokemon.id}
-          height={pokemon.height}
-          weight={pokemon.weight}
-          abilities={pokemon.abilities}
-          stats={pokemon.stats}
-        />
-      ))}
+    <div className="pokemon-list">
+      <div className="card-container">
+        {list.map((pokemon) => (
+          <CardPokemon
+            key={pokemon.id}
+            name={pokemon.name}
+            image={pokemon.image}
+            id={pokemon.id}
+            height={pokemon.height}
+            weight={pokemon.weight}
+            abilities={pokemon.abilities}
+            stats={pokemon.stats}
+          />
+        ))}
+      </div>
     </div>
   );
 }

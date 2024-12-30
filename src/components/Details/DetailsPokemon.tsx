@@ -40,6 +40,7 @@ export function DetailsPokemon({
   stats,
   onClose,
 }: DetailsPokemonProps) {
+  
   return (
     <Box
       sx={{

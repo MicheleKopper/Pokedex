@@ -86,7 +86,19 @@ const pokemonSlice = createSlice({
   initialState: initialState,
   reducers: {
     addFavorites: (state, action: PayloadAction<Pokemon>) => {
-      state.favorites.push(action.payload);
+      const existsFavorite = state.favorites.some(
+        (favorite) => favorite.id === action.payload.id
+      );
+
+      if (!existsFavorite) {
+        state.favorites.push(action.payload);
+      }
+    },
+
+    removeFavorites: (state, action: PayloadAction<number>) => {
+      state.favorites = state.favorites.filter(
+        (favorite) => favorite.id !== action.payload
+      );
     },
   },
   extraReducers(builder) {
@@ -112,5 +124,5 @@ const pokemonSlice = createSlice({
   },
 });
 
-export const { addFavorites } = pokemonSlice.actions;
+export const { addFavorites, removeFavorites } = pokemonSlice.actions;
 export const pokemonReducer = pokemonSlice.reducer;

@@ -31,7 +31,6 @@ export function CardPokemon({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "100vw",
         marginTop: "80px",
       }}
     >
@@ -66,8 +65,9 @@ export function CardPokemon({
           >
             <Typography gutterBottom variant="h5" component="div">
               {name.charAt(0).toUpperCase() + name.slice(1)}
-              {/* charAt(0).toUpperCase(): pega a primeira letra e modifica
+              {
               
+            /* charAt(0).toUpperCase(): pega a primeira letra e modifica
               slice(1): pega o restante a partir da segunda letra (não modifica a fonte) */}
             </Typography>
 

@@ -4,6 +4,7 @@ import { CardPokemon } from "../Card/CardPokemon";
 import { AppDispatch, RootState } from "../store";
 import { pokemonAsyncThunk } from "../store/modules/pokemonSlice";
 
+
 export function PokemonList() {
   const dispatch = useDispatch<AppDispatch>();
   const { list, loading } = useSelector((state: RootState) => state.pokemon);
@@ -17,7 +18,7 @@ export function PokemonList() {
   }
 
   return (
-    <>
+    <div className="card-container">
       {list.map((pokemon) => (
         <CardPokemon
           key={pokemon.id}
@@ -28,6 +29,7 @@ export function PokemonList() {
           weight={pokemon.weight}
         />
       ))}
-    </>
+    </div>
   );
+
 }

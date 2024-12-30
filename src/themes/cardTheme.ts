@@ -33,14 +33,12 @@ export const cardTheme = createTheme({
   // root = define estilos globais
 
   components: {
-    MuiIconButton: {
+    MuiCssBaseline: {
       styleOverrides: {
-        root: {
-          color: "#B4B4B3",
-
-          "&:hover": {
-            color: "#FE0000",
-          },
+        ".card-container": {
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          padding: "50px",
         },
       },
     },

@@ -1,12 +1,30 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
+interface Ability {
+  ability: {
+    name: string;
+  };
+  is_hidden: boolean;
+  slot: number;
+}
+
+interface Stats {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+  };
+}
+
 interface Pokemon {
   name: string;
-  id: number;
   image: string;
+  id: number;
   height: number;
   weight: number;
+  abilities: Ability[];
+  stats: Stats[];
 }
 
 interface PokemonState {
@@ -43,6 +61,8 @@ export const pokemonAsyncThunk = createAsyncThunk<Pokemon[]>(
           image: details.data.sprites.other.home.front_default,
           height: details.data.height,
           weight: details.data.weight,
+          abilities: details.data.abilities,
+          stats: details.data.stats,
         };
       })
     );

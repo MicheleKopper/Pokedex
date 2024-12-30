@@ -1,12 +1,11 @@
-import { useParams } from "react-router-dom";
+import { Navbar } from "../components/Navbar/Navbar";
+import { DetailsPokemon } from "../components/Details/DetailsPokemon";
 
 export function Details() {
-  const { id } = useParams<{ id: string }>();
-
   return (
-    <div>
-      <h1>Detalhes do Pokémon</h1>
-      <p>ID do Pokémon: {id}</p>
-    </div>
+    <>
+      <Navbar />
+      <DetailsPokemon />
+    </>
   );
 }

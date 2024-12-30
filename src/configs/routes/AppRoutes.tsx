@@ -4,7 +4,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Home } from "../../pages/Home";
-import { Details } from "@mui/icons-material";
+import { Details } from "../../pages/Details";
+
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/details/:id",
+    path: "/details",
     element: <Details />,
   },
   {

@@ -7,6 +7,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useState } from "react";
 import { DetailsPokemon } from "../Details/DetailsPokemon";
+import { useDispatch } from "react-redux";
+import { addFavorites } from "../store/modules/pokemonSlice";
 
 interface Ability {
   ability: {
@@ -43,16 +45,23 @@ export function CardPokemon({
   abilities,
   stats,
 }: Pokemon) {
-  
+ 
+  // Modal
   const [open, setOpen] = useState(false);
 
-  // Função para abrir o modal
   const handleOpen = () => setOpen(true);
 
-  // Função para fechar o modal
   const handleClose = () => setOpen(false);
 
-  
+  // Pokedex favorites
+  const dispatch = useDispatch();
+
+  const handleFavorite = () => {
+    console.log("Adicionando aos favoritos:", { name, image, id });
+    dispatch(
+      addFavorites({ name, image, id, height, weight, abilities, stats })
+    );
+  };
 
   return (
     <Box
@@ -120,7 +129,7 @@ export function CardPokemon({
             <CatchingPokemonIcon />
           </IconButton>
 
-          <IconButton aria-label="Pokedex">
+          <IconButton aria-label="Pokedex" onClick={handleFavorite}>
             <FavoriteIcon />
           </IconButton>
 

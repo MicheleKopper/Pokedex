@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material";
 
 export const cardTheme = createTheme({
- 
   typography: {
     fontFamily: "'DM Sans', sans-serif",
 
@@ -22,12 +21,9 @@ export const cardTheme = createTheme({
     },
   },
 
- 
   palette: {},
 
-
   breakpoints: {},
-
 
   // styleOverrides = altera estilos padrão (cor, margens, espaçamento), define estados (hover, :focus), personaliza CSS global
   // root = define estilos globais
@@ -50,6 +46,25 @@ export const cardTheme = createTheme({
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
           padding: "50px",
+        },
+      },
+    },
+
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "spece-between",
+          width: "300px",
+          backgroundColor: "black",
+          color: "white",
+          borderRadius: "50px",
+          padding: "10px 20px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        },
+        icon: {
+          marginRight: "10px",
         },
       },
     },

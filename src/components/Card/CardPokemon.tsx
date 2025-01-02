@@ -9,6 +9,7 @@ import { useState } from "react";
 import { DetailsPokemon } from "../Details/DetailsPokemon";
 import { useDispatch } from "react-redux";
 import { addFavorites } from "../store/modules/pokemonSlice";
+import { AlertFavorite } from "../Alert/AlertFavorite";
 
 interface Ability {
   ability: {
@@ -45,12 +46,11 @@ export function CardPokemon({
   abilities,
   stats,
 }: Pokemon) {
- 
-  // Modal
   const [open, setOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
 
+  // Modal
   const handleOpen = () => setOpen(true);
-
   const handleClose = () => setOpen(false);
 
   // Pokedex favorites
@@ -61,6 +61,8 @@ export function CardPokemon({
     dispatch(
       addFavorites({ name, image, id, height, weight, abilities, stats })
     );
+    setAlertOpen(true); // Exibe o alerta de sucesso
+    setTimeout(() => setAlertOpen(false), 3000);
   };
 
   return (
@@ -148,6 +150,9 @@ export function CardPokemon({
           </Dialog>
         </Box>
       </Card>
+
+      {/* Alert */}
+      <AlertFavorite open={alertOpen} onClose={() => setAlertOpen(false)} />
     </Box>
   );
 }

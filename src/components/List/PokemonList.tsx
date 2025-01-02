@@ -12,7 +12,7 @@ export function PokemonList() {
   const [page, setPage] = useState(1);
 
   // Estado global
-  const { list, loading, total, favorites } = useSelector(
+  const { list, loading, total } = useSelector(
     (state: RootState) => state.pokemon
   );
 
@@ -52,19 +52,6 @@ export function PokemonList() {
         page={page}
         onChange={handleChange}
       />
-
-      {/* Pokedex */}
-      <div className="pokedex">
-        <h2>Pokedex</h2>
-        <div className="pokedex-container">
-          {favorites.map((favorite) => (
-            <div key={favorite.id} className="favorite-id">
-              <img src={favorite.image} alt={favorite.name} />
-              <p>{favorite.name}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

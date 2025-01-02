@@ -1,20 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardPokemon } from "../Card/CardPokemon";
 import { AppDispatch, RootState } from "../store";
 import { pokemonAsyncThunk } from "../store/modules/pokemonSlice";
+import { Pagination } from "@mui/material";
 
 export function PokemonList() {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { list, loading } = useSelector(
+  // Estado da página
+  const [page, setPage] = useState(1);
+
+  // Estado global
+  const { list, loading, total } = useSelector(
     (state: RootState) => state.pokemon
   );
 
+  // Busca os Pokemons na página atual
   useEffect(() => {
-    dispatch(pokemonAsyncThunk());
-  }, [dispatch]);
+    dispatch(pokemonAsyncThunk({ page, limit: 20 }));
+  }, [dispatch, page]);
 
+  // Manipula a paginação
+  const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  // Renderização condicional
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -35,6 +47,11 @@ export function PokemonList() {
           />
         ))}
       </div>
+      <Pagination
+        count={Math.ceil(total / 20)} //Math.ceil() arredonda o resultado para cima, garantindo que a última página mostre todos os itens, mesmo tendo menos de 20
+        page={page}
+        onChange={handleChange}
+      />
     </div>
   );
 }

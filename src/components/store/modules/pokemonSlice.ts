@@ -32,6 +32,8 @@ interface PokemonState {
   details: Pokemon | null;
   favorites: Pokemon[];
   loading: boolean;
+  total: number; 
+  currentPage: number; // Página atual
 }
 
 const initialState: PokemonState = {
@@ -39,37 +41,41 @@ const initialState: PokemonState = {
   details: null,
   favorites: [],
   loading: false,
+  total: 0,
+  currentPage: 1,
 };
 
 // createAsyncThunk(nome, callback): Promise
 // Buscar os dados da API - CARD
-export const pokemonAsyncThunk = createAsyncThunk<Pokemon[]>(
-  "pokemon/list",
-  async () => {
-    const response = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20"
-    );
-    const results = response.data.results;
+export const pokemonAsyncThunk = createAsyncThunk<
+  { results: Pokemon[]; total: number }, // Tipo do retorno
+  { page: number; limit: number } // Parâmetros aceitos
+>("pokemon/list", async ({ page, limit }) => {
+  const offset = (page - 1) * limit; // Calcula offset com parâmetro da página atual
 
-    // Obter detalhes adicionais para cada Pokémon
-    const detailedPokemon = await Promise.all(
-      results.map(async (pokemon: { name: string; url: string }) => {
-        const details = await axios.get(pokemon.url);
-        return {
-          name: details.data.name,
-          id: details.data.id,
-          image: details.data.sprites.other.home.front_default,
-          height: details.data.height,
-          weight: details.data.weight,
-          abilities: details.data.abilities,
-          stats: details.data.stats,
-        };
-      })
-    );
+  const response = await axios.get(
+    `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+  );
+  const results = response.data.results;
 
-    return detailedPokemon;
-  }
-);
+  // Obter detalhes adicionais para cada Pokémon
+  const detailedPokemon = await Promise.all(
+    results.map(async (pokemon: { name: string; url: string }) => {
+      const details = await axios.get(pokemon.url);
+      return {
+        name: details.data.name,
+        id: details.data.id,
+        image: details.data.sprites.other.home.front_default,
+        height: details.data.height,
+        weight: details.data.weight,
+        abilities: details.data.abilities,
+        stats: details.data.stats,
+      };
+    })
+  );
+
+  return { results: detailedPokemon, total: response.data.count };
+});
 
 // Buscar os dados da API - DETALHES
 export const detailsPokemonAsyncThunk = createAsyncThunk(
@@ -112,9 +118,13 @@ const pokemonSlice = createSlice({
       // fulfilled = está completo
       .addCase(
         pokemonAsyncThunk.fulfilled,
-        (state, action: PayloadAction<Pokemon[]>) => {
+        (
+          state,
+          action: PayloadAction<{ results: Pokemon[]; total: number }>
+        ) => {
           state.loading = false; // Para de carregar
-          state.list = action.payload;
+          state.list = action.payload.results
+          state.total = action.payload.total
         }
       )
 

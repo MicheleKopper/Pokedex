@@ -1,7 +1,6 @@
-
-
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { CardFavorite } from "./CardFavorite";
 
 export function PokedexFavorites() {
   const { favorites } = useSelector((state: RootState) => state.pokemon);
@@ -12,10 +11,11 @@ export function PokedexFavorites() {
       <div className="favorites-container">
         {favorites.length > 0 ? (
           favorites.map((favorite) => (
-            <div key={favorite.id} className="favorite-item">
-              <img src={favorite.image} alt={favorite.name} />
-              <p>{favorite.name}</p>
-            </div>
+            <CardFavorite
+              key={favorite.id}
+              name={favorite.name}
+              image={favorite.image}
+            />
           ))
         ) : (
           <p>No favorites yet</p>

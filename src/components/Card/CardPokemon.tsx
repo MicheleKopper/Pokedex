@@ -77,7 +77,7 @@ export function CardPokemon({
       <Card
         sx={{
           width: 250,
-          height: 350,
+          height: "auto",
           borderRadius: "20px",
           boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
         }}

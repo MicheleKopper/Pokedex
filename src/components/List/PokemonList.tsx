@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { CardPokemon } from "../Card/CardPokemon";
 import { AppDispatch, RootState } from "../store";
 import { pokemonAsyncThunk } from "../store/modules/pokemonSlice";
-import { Pagination } from "@mui/material";
+import { Pagination, PaginationItem } from "@mui/material";
+import { CardFavorite } from "../Pokedex/CardFavorite";
 
-export function PokemonList() {
+interface PokemonListProps {
+  showFavorites?: boolean;
+}
+
+export function PokemonList({ showFavorites = false }: PokemonListProps) {
   const dispatch = useDispatch<AppDispatch>();
 
   // Estado da página
   const [page, setPage] = useState(1);
 
   // Estado global
-  const { list, loading, total } = useSelector(
+  const { list, loading, total, favorites } = useSelector(
     (state: RootState) => state.pokemon
   );
 
@@ -33,6 +38,7 @@ export function PokemonList() {
 
   return (
     <div className="pokemon-list">
+      {/* CARDS */}
       <div className="card-container">
         {list.map((pokemon) => (
           <CardPokemon
@@ -47,10 +53,41 @@ export function PokemonList() {
           />
         ))}
       </div>
+
+      {/* FAVORITES */}
+      {showFavorites && favorites.length > 0 && (
+        <section className="favorites-section">
+          <div className="favorites-container">
+            {favorites.map((favorite) => (
+              <CardFavorite
+                key={favorite.id}
+                name={favorite.name}
+                image={favorite.image}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
       <Pagination
         count={Math.ceil(total / 20)} //Math.ceil() arredonda o resultado para cima, garantindo que a última página mostre todos os itens, mesmo tendo menos de 20
         page={page}
         onChange={handleChange}
+        renderItem={(item) => (
+          <PaginationItem
+            {...item}
+            sx={{
+              color: "#4C585B", // Cor dos itens
+              "&:hover": {
+                backgroundColor: "#FFCC00", // Cor ao passar o mouse
+              },
+              "&.Mui-selected": {
+                backgroundColor: "#4C585B", // Cor do item selecionado
+                color: "white", // Cor do texto no item selecionado
+              },
+            }}
+          />
+        )}
       />
     </div>
   );

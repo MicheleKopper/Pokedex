@@ -21,13 +21,8 @@ export const cardTheme = createTheme({
     },
   },
 
-  palette: {},
-
-  breakpoints: {},
-
   // styleOverrides = altera estilos padrão (cor, margens, espaçamento), define estados (hover, :focus), personaliza CSS global
   // root = define estilos globais
-
   components: {
     MuiIconButton: {
       styleOverrides: {
@@ -65,6 +60,16 @@ export const cardTheme = createTheme({
         },
         icon: {
           marginRight: "10px",
+        },
+      },
+    },
+
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "50px",
         },
       },
     },

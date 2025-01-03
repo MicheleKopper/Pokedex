@@ -1,6 +1,15 @@
 import { createTheme } from "@mui/material";
 
 export const cardTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
   typography: {
     fontFamily: "'DM Sans', sans-serif",
 
@@ -24,7 +33,6 @@ export const cardTheme = createTheme({
   // styleOverrides = altera estilos padrão (cor, margens, espaçamento), define estados (hover, :focus), personaliza CSS global
   // root = define estilos globais
   components: {
-    
     MuiIconButton: {
       styleOverrides: {
         root: {
@@ -64,9 +72,5 @@ export const cardTheme = createTheme({
         },
       },
     },
-
-   
   },
-
-  
 });

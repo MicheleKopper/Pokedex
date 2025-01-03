@@ -22,6 +22,7 @@ export function Navbar() {
     <Box
       sx={{
         flexGrow: 1,
+        marginBottom:"50px"
       }}
     >
       <AppBar position="static">

@@ -19,7 +19,7 @@ export function CardFavorite({ name, image }: CardFavoriteProps) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "80px",
+        marginTop: "30px",
       }}
     >
       <Card

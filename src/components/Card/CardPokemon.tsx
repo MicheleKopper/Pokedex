@@ -71,7 +71,7 @@ export function CardPokemon({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "80px",
+        marginTop: "30px",
       }}
     >
       <Card

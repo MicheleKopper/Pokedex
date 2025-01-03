@@ -43,7 +43,13 @@ export function PokemonList({ showFavorites = false }: PokemonListProps) {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: {
+            xs: "repeat(1, 1fr)",
+            sm: "repeat(2, 1fr)",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(4, 1fr)",
+          },
+          padding: { xs: "0 16px", sm: "0 32px", md: "0 64px" },
         }}
       >
         {/* CARD POKEMON */}

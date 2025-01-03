@@ -38,8 +38,8 @@ export function PokemonList({ showFavorites = false }: PokemonListProps) {
 
   return (
     <div className="pokemon-list">
+      
       {/* CARDS */}
-
       <Box
         sx={{
           display: "grid",

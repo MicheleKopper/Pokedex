@@ -28,6 +28,19 @@ export const cardTheme = createTheme({
       fontWeight: 400,
       color: "#4C585B",
     },
+    subtitle2: {
+      fontSize: 16,
+      fontWeight: 500,
+      color: "#4C585B",
+      "&:hover": {
+        color: "#FFCC00",
+      },
+    },
+    body1: {
+      fontSize: 13,
+      fontWeight: 300,
+      color: "#4C585B",
+    },
   },
 
   // styleOverrides = altera estilos padrão (cor, margens, espaçamento), define estados (hover, :focus), personaliza CSS global

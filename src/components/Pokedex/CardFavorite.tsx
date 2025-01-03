@@ -1,4 +1,11 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid2,
+  Typography,
+} from "@mui/material";
 
 interface CardFavoriteProps {
   name: string;
@@ -7,28 +14,49 @@ interface CardFavoriteProps {
 
 export function CardFavorite({ name, image }: CardFavoriteProps) {
   return (
-    <Card
+    <Box
       sx={{
-        width: 250,
-        height: "auto",
-        borderRadius: "20px",
-        boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
-        margin: "10px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "80px",
       }}
     >
-      <CardMedia
-        component="img"
+      <Card
         sx={{
-          width: "100%",
-          height: "200px",
-          objectFit: "contain",
+          width: 250,
+          height: "auto",
+          borderRadius: "20px",
+          boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
+          margin: "10px",
         }}
-        image={image}
-        alt={name}
-      />
-      <CardContent>
-        <Typography variant="h6">{name}</Typography>
-      </CardContent>
-    </Card>
+      >
+        <CardMedia
+          component="img"
+          sx={{
+            width: "100%",
+            height: "200px",
+            objectFit: "contain",
+          }}
+          image={image}
+          alt={name}
+        />
+        <CardContent>
+          <Grid2
+            container
+            spacing={2}
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="h6">
+              {name.charAt(0).toUpperCase() + name.slice(1)}
+            </Typography>
+          </Grid2>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }

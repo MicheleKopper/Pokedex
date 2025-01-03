@@ -149,10 +149,10 @@ export function CardPokemon({
             />
           </Dialog>
         </Box>
-      </Card>
 
-      {/* Alert */}
-      <AlertFavorite open={alertOpen} onClose={() => setAlertOpen(false)} />
+        {/* Alert */}
+        <AlertFavorite open={alertOpen} onClose={() => setAlertOpen(false)} />
+      </Card>
     </Box>
   );
 }

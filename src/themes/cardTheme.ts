@@ -24,6 +24,7 @@ export const cardTheme = createTheme({
   // styleOverrides = altera estilos padrão (cor, margens, espaçamento), define estados (hover, :focus), personaliza CSS global
   // root = define estilos globais
   components: {
+    
     MuiIconButton: {
       styleOverrides: {
         root: {
@@ -31,16 +32,6 @@ export const cardTheme = createTheme({
           "&:hover": {
             color: "#C40C0C",
           },
-        },
-      },
-    },
-
-    MuiCssBaseline: {
-      styleOverrides: {
-        ".card-container": {
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          padding: "50px",
         },
       },
     },
@@ -69,9 +60,13 @@ export const cardTheme = createTheme({
         root: {
           display: "flex",
           justifyContent: "center",
-          marginBottom: "50px",
+          margin: "50px",
         },
       },
     },
+
+   
   },
+
+  
 });

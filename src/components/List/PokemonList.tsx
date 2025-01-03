@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CardPokemon } from "../Card/CardPokemon";
 import { AppDispatch, RootState } from "../store";
 import { pokemonAsyncThunk } from "../store/modules/pokemonSlice";
-import { Pagination, PaginationItem } from "@mui/material";
+import { Box, Pagination, PaginationItem } from "@mui/material";
 import { CardFavorite } from "../Pokedex/CardFavorite";
 
 interface PokemonListProps {
@@ -39,35 +39,39 @@ export function PokemonList({ showFavorites = false }: PokemonListProps) {
   return (
     <div className="pokemon-list">
       {/* CARDS */}
-      <div className="card-container">
-        {list.map((pokemon) => (
-          <CardPokemon
-            key={pokemon.id}
-            name={pokemon.name}
-            image={pokemon.image}
-            id={pokemon.id}
-            height={pokemon.height}
-            weight={pokemon.weight}
-            abilities={pokemon.abilities}
-            stats={pokemon.stats}
-          />
-        ))}
-      </div>
 
-      {/* FAVORITES */}
-      {showFavorites && favorites.length > 0 && (
-        <section className="favorites-section">
-          <div className="favorites-container">
-            {favorites.map((favorite) => (
-              <CardFavorite
-                key={favorite.id}
-                name={favorite.name}
-                image={favorite.image}
-              />
-            ))}
-          </div>
-        </section>
-      )}
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+        }}
+      >
+        {/* CARD POKEMON */}
+        {!showFavorites &&
+          list.map((pokemon) => (
+            <CardPokemon
+              key={pokemon.id}
+              name={pokemon.name}
+              image={pokemon.image}
+              id={pokemon.id}
+              height={pokemon.height}
+              weight={pokemon.weight}
+              abilities={pokemon.abilities}
+              stats={pokemon.stats}
+            />
+          ))}
+
+        {/* FAVORITE */}
+        {showFavorites &&
+          favorites.length > 0 &&
+          favorites.map((favorite) => (
+            <CardFavorite
+              key={favorite.id}
+              name={favorite.name}
+              image={favorite.image}
+            />
+          ))}
+      </Box>
 
       <Pagination
         count={Math.ceil(total / 20)} //Math.ceil() arredonda o resultado para cima, garantindo que a última página mostre todos os itens, mesmo tendo menos de 20
@@ -77,13 +81,13 @@ export function PokemonList({ showFavorites = false }: PokemonListProps) {
           <PaginationItem
             {...item}
             sx={{
-              color: "#4C585B", // Cor dos itens
+              color: "#4C585B",
               "&:hover": {
-                backgroundColor: "#FFCC00", // Cor ao passar o mouse
+                backgroundColor: "#FFCC00",
               },
               "&.Mui-selected": {
-                backgroundColor: "#4C585B", // Cor do item selecionado
-                color: "white", // Cor do texto no item selecionado
+                backgroundColor: "#4C585B",
+                color: "white",
               },
             }}
           />

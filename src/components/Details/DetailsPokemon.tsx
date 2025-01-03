@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 
 interface Ability {
   ability: {
@@ -44,35 +44,69 @@ export function DetailsPokemon({
   return (
     <Box
       sx={{
-        padding: "20px",
+        padding: "30px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        bgcolor: "#f9f9f9",
+        borderRadius: "10px",
+        boxShadow: 3,
+        maxWidth: "400px",
+        margin: "auto",
+        textAlign: "center",
       }}
     >
       <Typography variant="h5">
         {name.charAt(0).toUpperCase() + name.slice(1)}
       </Typography>
+
       <img
         src={image}
         alt={name}
         style={{ width: "200px", height: "200px", objectFit: "contain" }}
       />
 
-      <Typography variant="h6"># {id}</Typography>
-
-      <Typography variant="subtitle1">
-        Height: {height} | Weight: {weight}
+      <Typography variant="h6" sx={{ marginBottom: "10px", color: "#555" }}>
+        #{id}
       </Typography>
 
-      <Typography variant="subtitle1">
-        Abilities: {abilities.map((ability) => ability.ability.name).join(", ")}
+      <Typography
+        variant="subtitle1"
+        sx={{ color: "#777", marginBottom: "10px" }}
+      >
+        <strong>Height:</strong> {height} | <strong>Weight:</strong> {weight}
       </Typography>
 
-      <Typography variant="subtitle1">
-        Stats:{" "}
-        {stats.map((stat) => `${stat.stat.name}: ${stat.base_stat}`).join(", ")}
+      <Typography
+        variant="subtitle2"
+        sx={{ color: "#777", marginBottom: "15px" }}
+      >
+        <strong>Abilities:</strong>{" "}
+        {abilities.map((ability) => ability.ability.name).join(", ")}
       </Typography>
+
+      <Paper
+        sx={{
+          width: "100%",
+          padding: "10px",
+          backgroundColor: "#0960AE",
+          color: "white",
+          borderRadius: "8px",
+        }}
+      >
+        <Typography
+          variant="subtitle2"
+          sx={{ fontWeight: "bold", marginBottom: "10px" }}
+        >
+          Stats:
+        </Typography>
+        {stats.map((stat) => (
+          <Typography key={stat.stat.name} variant="body2">
+            {stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}:{" "}
+            {stat.base_stat}
+          </Typography>
+        ))}
+      </Paper>
 
       <Button
         onClick={onClose}

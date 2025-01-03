@@ -1,11 +1,14 @@
 import {
   Box,
+
   Card,
   CardContent,
   CardMedia,
   Grid2,
   Typography,
 } from "@mui/material";
+
+
 
 interface CardFavoriteProps {
   name: string;
@@ -57,6 +60,8 @@ export function CardFavorite({ name, image }: CardFavoriteProps) {
           </Grid2>
         </CardContent>
       </Card>
+
+      
     </Box>
   );
 }

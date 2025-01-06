@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardPokemon } from "../Card/CardPokemon";
-import { AppDispatch, RootState } from "../store";
-import { pokemonAsyncThunk } from "../store/modules/pokemonSlice";
+import { AppDispatch, RootState } from "../../store";
+import { pokemonAsyncThunk } from "../../store/modules/pokemonSlice";
 import { Box, Pagination, PaginationItem } from "@mui/material";
 import { CardFavorite } from "../Pokedex/CardFavorite";
 
@@ -38,7 +38,6 @@ export function PokemonList({ showFavorites = false }: PokemonListProps) {
 
   return (
     <div className="pokemon-list">
-      
       {/* CARDS */}
       <Box
         sx={{

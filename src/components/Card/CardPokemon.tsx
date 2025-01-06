@@ -8,7 +8,7 @@ import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useState } from "react";
 import { DetailsPokemon } from "../Details/DetailsPokemon";
 import { useDispatch } from "react-redux";
-import { addFavorites } from "../store/modules/pokemonSlice";
+import { addFavorites } from "../../store/modules/pokemonSlice";
 import { AlertFavorite } from "../Alert/AlertFavorite";
 
 interface Ability {

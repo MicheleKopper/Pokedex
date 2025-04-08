@@ -42,6 +42,8 @@ export function PokemonList({ showFavorites = false }: PokemonListProps) {
       <Box
         sx={{
           display: "grid",
+          justifyContent:"center",
+          alignItems:"center",
           gridTemplateColumns: {
             xs: "repeat(1, 1fr)",
             sm: "repeat(2, 1fr)",

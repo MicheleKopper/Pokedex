@@ -32,7 +32,7 @@ interface PokemonState {
   details: Pokemon | null;
   favorites: Pokemon[];
   loading: boolean;
-  total: number; 
+  total: number;
   currentPage: number; // Página atual
 }
 
@@ -123,8 +123,8 @@ const pokemonSlice = createSlice({
           action: PayloadAction<{ results: Pokemon[]; total: number }>
         ) => {
           state.loading = false; // Para de carregar
-          state.list = action.payload.results
-          state.total = action.payload.total
+          state.list = action.payload.results;
+          state.total = action.payload.total;
         }
       )
 
